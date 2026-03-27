@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import library.DAO.*;
 import library.entities.*;
+import library.exception.NotFoundException;
 
 import java.time.LocalDate;
 
@@ -79,11 +80,28 @@ public class App {
 //        }
 
 
-        // REMOVE
+        // REMOVE ISBN
 
         ItemDAO itemDAO = new ItemDAO(em);
-        itemDAO.deleteByIsbn("978-8806222413");
-        itemDAO.deleteByIsbn("123");
+//        itemDAO.deleteByIsbn("978-8806222413"); // ora eliminato
+//        itemDAO.deleteByIsbn("123");
+
+
+        // FIND BY ISBN
+
+        try {
+            Item foundErr = itemDAO.findByIsbn("00");
+            System.out.println(foundErr);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            Item foundIsbn = itemDAO.findByIsbn("978-8830415058");
+            System.out.println(foundIsbn);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
 
 
         em.close();

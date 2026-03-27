@@ -2,6 +2,9 @@ package library.DAO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
+import library.entities.Item;
+import library.exception.NotFoundException;
 
 public class ItemDAO {
 
@@ -31,6 +34,18 @@ public class ItemDAO {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public Item findByIsbn(String isbn) {
+        try {
+            return em.createQuery(
+                            "SELECT i FROM Item i WHERE i.isbn = :isbn", Item.class)
+                    .setParameter("isbn", isbn)
+                    .getSingleResult();
+
+        } catch (NoResultException e) {
+            throw new NotFoundException("Elemento con ISBN " + isbn + " non trovato");
         }
     }
 }
