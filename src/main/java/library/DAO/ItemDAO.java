@@ -6,6 +6,8 @@ import jakarta.persistence.NoResultException;
 import library.entities.Item;
 import library.exception.NotFoundException;
 
+import java.util.List;
+
 public class ItemDAO {
 
     private final EntityManager em;
@@ -40,12 +42,26 @@ public class ItemDAO {
     public Item findByIsbn(String isbn) {
         try {
             return em.createQuery(
-                            "SELECT i FROM Item i WHERE i.isbn = :isbn", Item.class)
+                            "SELECT i FROM Item i WHERE i.isbn = :isbn ", Item.class)
                     .setParameter("isbn", isbn)
                     .getSingleResult();
 
         } catch (NoResultException e) {
             throw new NotFoundException("Elemento con ISBN " + isbn + " non trovato");
         }
+    }
+
+
+    public List<Item> findByPubYear(int year) {
+        List<Item> results = em.createQuery(
+                        "SELECT i FROM Item i WHERE i.publicationYear = :year", Item.class)
+                .setParameter("year", year)
+                .getResultList();
+
+        if (results.isEmpty()) {
+            throw new NotFoundException("Nessun elemento trovato per l'anno " + year);
+        }
+
+        return results;
     }
 }

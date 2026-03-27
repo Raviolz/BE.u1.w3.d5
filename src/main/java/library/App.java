@@ -8,6 +8,7 @@ import library.entities.*;
 import library.exception.NotFoundException;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 public class App {
@@ -103,6 +104,30 @@ public class App {
             System.out.println(e.getMessage());
         }
 
+
+        // FIND BY PUB YEAR
+
+        Book b5 = new Book("988-1204719113", 2024, 208, "Test per anno anche libri", "Io", Genre.HORROR);
+//        bookDAO.save(b5);
+
+        try {
+            List<Item> itemsByYeareErr = itemDAO.findByPubYear(3016);
+
+            itemsByYeareErr.forEach(item -> System.out.println(item));
+
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+        try {
+            List<Item> itemsByYear = itemDAO.findByPubYear(2024);
+
+            itemsByYear.forEach(item -> System.out.println(item));
+
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
 
         em.close();
         emf.close();
