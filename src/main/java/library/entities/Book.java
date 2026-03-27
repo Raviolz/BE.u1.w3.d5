@@ -1,11 +1,9 @@
 package library.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "books")
 public class Book extends Item {
 
     @Column(nullable = false, length = 50)

@@ -6,6 +6,8 @@
         <class>library.entities.Item</class>
         <class>library.entities.Book</class>
         <class>library.entities.Magazine</class>
+        <class>library.entities.User</class>
+        <class>library.entities.Loan</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/u1w3d5"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
