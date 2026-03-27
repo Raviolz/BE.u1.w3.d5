@@ -34,13 +34,15 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(User user, Item item, LocalDate startDate, LocalDate dueDate, LocalDate returnDate) {
+
+    public Loan(User user, Item item) {
         this.user = user;
         this.item = item;
         this.startDate = LocalDate.now();
         this.dueDate = this.startDate.plusDays(30);
-        this.returnDate = returnDate;
+        this.returnDate = null;
     }
+
 
     public UUID getId() {
         return id;
@@ -82,8 +84,8 @@ public class Loan {
     public String toString() {
         return "Loan{" +
                 "id=" + id +
-                ", user=" + user +
-                ", item=" + item +
+                ", user=" + user.getId() + user.getLastName() + user.getFirstName() +
+                ", item=" + item.getItemId() +
                 ", startDate=" + startDate +
                 ", dueDate=" + dueDate +
                 ", returnDate=" + returnDate +

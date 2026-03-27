@@ -51,7 +51,7 @@ public class App {
         }
 
 
-        // User
+        //  User
 
         User u1 = new User("Marco", "Rossi", LocalDate.of(1974, 11, 9));
         User u2 = new User("Piero", "Baggio", LocalDate.of(1967, 2, 18));
@@ -67,7 +67,21 @@ public class App {
             System.err.println("Errore durante il salvataggio: " + e.getMessage());
         }
 
-        
+        //  loan
+
+
+        Loan l1 = new Loan(u1, b1);
+        Loan l2 = new Loan(u2, m1);
+
+        try {
+            loanDAO.save(new Loan(u3, b1));
+            loanDAO.save(l1);
+            loanDAO.save(l2);
+        } catch (Exception e) {
+            System.err.println("Errore durante il salvataggio: " + e.getMessage());
+        }
+
+
         em.close();
         emf.close();
     }
