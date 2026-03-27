@@ -29,8 +29,8 @@ public class BookDAO {
 
     public List<Book> findByAuthor(String author) {
         List<Book> foundBooks = em.createQuery(
-                        "SELECT b FROM Book b WHERE b.author = :author", Book.class)
-                .setParameter("author", author)
+                        "SELECT b FROM Book b WHERE LOWER(b.author) LIKE LOWER(:author)", Book.class)
+                .setParameter("author", "%" + author + "%")
                 .getResultList();
 
         if (foundBooks.isEmpty()) {

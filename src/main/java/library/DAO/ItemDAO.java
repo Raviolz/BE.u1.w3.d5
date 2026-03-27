@@ -64,4 +64,18 @@ public class ItemDAO {
 
         return results;
     }
+
+
+    public List<Item> findByTitle(String title) {
+        List<Item> results = em.createQuery(
+                        "SELECT i FROM Item i WHERE LOWER(i.title) LIKE LOWER(:title)", Item.class)
+                .setParameter("title", "%" + title + "%")
+                .getResultList();
+
+        if (results.isEmpty()) {
+            throw new NotFoundException("Nessun elemento trovato con titolo contenente: " + title);
+        }
+
+        return results;
+    }
 }

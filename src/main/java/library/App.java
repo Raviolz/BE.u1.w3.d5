@@ -141,9 +141,29 @@ public class App {
         Book b6 = new Book("191-1334719120", 1995, 100, "Sempre io per due libri stesso autore", "Io", Genre.GRAPHICNOVEL);
 //        bookDAO.save(b6);
 
+        // test migliorato per %   %
         try {
-            List<Book> booksByAuthor = bookDAO.findByAuthor("Io");
+            List<Book> booksByAuthor = bookDAO.findByAuthor("r.r");
             booksByAuthor.forEach(book -> System.out.println(book));
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+        // FIND BY TITLE
+
+        System.out.println("-----------------------------------------------------------------------");
+
+        try {
+            List<Item> items = itemDAO.findByTitle("IL");
+            items.forEach(item -> System.out.println(item));
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            List<Item> items = itemDAO.findByTitle("boh");
+            items.forEach(item -> System.out.println(item));
         } catch (NotFoundException e) {
             System.out.println(e.getMessage());
         }
