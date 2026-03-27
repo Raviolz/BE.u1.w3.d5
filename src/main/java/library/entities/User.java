@@ -23,17 +23,17 @@ public class User {
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
-    @Column(name = "membership_number", nullable = false, unique = true)
+    @Column(name = "membership_number", nullable = false, unique = true) // unique superfluo?
     private UUID membershipNumber;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, LocalDate birthDate, UUID membershipNumber) {
+    public User(String firstName, String lastName, LocalDate birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
-        this.membershipNumber = membershipNumber;
+        this.membershipNumber = UUID.randomUUID(); // Generato alla costruzione.. probabilita' si ripetano con il random?;
     }
 
     public UUID getId() {
@@ -52,9 +52,6 @@ public class User {
         return membershipNumber;
     }
 
-    public void setMembershipNumber(UUID membershipNumber) {
-        this.membershipNumber = membershipNumber;
-    }
 
     public String getLastName() {
         return lastName;
