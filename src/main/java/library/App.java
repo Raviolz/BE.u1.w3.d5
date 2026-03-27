@@ -3,10 +3,7 @@ package library;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import library.DAO.BookDAO;
-import library.DAO.LoanDAO;
-import library.DAO.MagazineDAO;
-import library.DAO.UserDAO;
+import library.DAO.*;
 import library.entities.*;
 
 import java.time.LocalDate;
@@ -32,23 +29,23 @@ public class App {
         Book b3 = new Book("978-8830415058", 1939, 212, "Dieci Piccoli Indiani", "Agatha Christie", Genre.THRILLER);
         Book b4 = new Book("978-8804719113", 2018, 528, "Il Fuoco e il Sangue", "George R.R. Martin", Genre.FANTASY);
 
-        Magazine m1 = new Magazine("ISSN-1234-5678", 2024, 60, "National Geographic", Frequency.MONTHLY);
-        Magazine m2 = new Magazine("ISSN-8765-4321", 2024, 45, "Time Magazine", Frequency.WEEKLY);
+        Magazine m1 = new Magazine("1234-5678", 2024, 60, "National Geographic", Frequency.MONTHLY);
+        Magazine m2 = new Magazine("8765-4321", 2024, 45, "Time Magazine", Frequency.WEEKLY);
 
-
-        try {
-            bookDAO.save(b1);
-            bookDAO.save(b2);
-            bookDAO.save(b3);
-            bookDAO.save(b4);
-            bookDAO.save(new Book("978-8807901300", 1943, 96, "Il Piccolo Principe", "Antoine de Saint-Exupéry", Genre.CHILDREN));
-            magazineDAO.save(m1);
-            magazineDAO.save(m2);
-            magazineDAO.save(new Magazine("ISSN-1122-3344", 2023, 120, "Vogue", Frequency.MONTHLY));
-            System.out.println("Salvataggio completato con successo!");
-        } catch (Exception e) {
-            System.err.println("Errore durante il salvataggio: " + e.getMessage());
-        }
+//
+//        try {
+//            bookDAO.save(b1);
+//            bookDAO.save(b2);
+//            bookDAO.save(b3);
+//            bookDAO.save(b4);
+//            bookDAO.save(new Book("978-8807901300", 1943, 96, "Il Piccolo Principe", "Antoine de Saint-Exupéry", Genre.CHILDREN));
+//            magazineDAO.save(m1);
+//            magazineDAO.save(m2);
+//            magazineDAO.save(new Magazine("1122-3344", 2023, 120, "Vogue", Frequency.MONTHLY));
+//            System.out.println("Salvataggio completato con successo!");
+//        } catch (Exception e) {
+//            System.err.println("Errore durante il salvataggio: " + e.getMessage());
+//        }
 
 
         //  User
@@ -58,14 +55,14 @@ public class App {
         User u3 = new User("Federica", "Pellegrini", LocalDate.of(1988, 8, 5));
 
 
-        try {
-            userDAO.save(u1);
-            userDAO.save(u2);
-            userDAO.save(u3);
-            userDAO.save(new User("Piera", "Baldelli", LocalDate.of(1955, 5, 1)));
-        } catch (Exception e) {
-            System.err.println("Errore durante il salvataggio: " + e.getMessage());
-        }
+//        try {
+//            userDAO.save(u1);
+//            userDAO.save(u2);
+//            userDAO.save(u3);
+//            userDAO.save(new User("Piera", "Baldelli", LocalDate.of(1955, 5, 1)));
+//        } catch (Exception e) {
+//            System.err.println("Errore durante il salvataggio: " + e.getMessage());
+//        }
 
         //  loan
 
@@ -73,13 +70,20 @@ public class App {
         Loan l1 = new Loan(u1, b1);
         Loan l2 = new Loan(u2, m1);
 
-        try {
-            loanDAO.save(new Loan(u3, b1));
-            loanDAO.save(l1);
-            loanDAO.save(l2);
-        } catch (Exception e) {
-            System.err.println("Errore durante il salvataggio: " + e.getMessage());
-        }
+//        try {
+//            loanDAO.save(new Loan(u3, b1));
+//            loanDAO.save(l1);
+//            loanDAO.save(l2);
+//        } catch (Exception e) {
+//            System.err.println("Errore durante il salvataggio: " + e.getMessage());
+//        }
+
+
+        // REMOVE
+
+        ItemDAO itemDAO = new ItemDAO(em);
+        itemDAO.deleteByIsbn("978-8806222413");
+        itemDAO.deleteByIsbn("123");
 
 
         em.close();
