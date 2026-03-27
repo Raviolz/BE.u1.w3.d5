@@ -9,6 +9,7 @@ import library.exception.NotFoundException;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 
 public class App {
@@ -164,6 +165,31 @@ public class App {
         try {
             List<Item> items = itemDAO.findByTitle("boh");
             items.forEach(item -> System.out.println(item));
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+        // FIND ITEM LENT ON MEMBERSHIP
+        System.out.println("*************************************************************************");
+        // System.out.println("Tessera di u1 nel codice: " + u1.getMembershipNumber());
+
+        // Mi sono accorta che non e' stata forse una buona idea fare il random dell UUID  perche ora ovviamente non coincidono piu perche java me lo cambia ogni volta ma nel
+        // database rimane giustamente uguale quindi non hanno piu correlazione tra qua e la  quindi u1.getMembershipNumber non funziona ma non ho tempo di rifare tutto quindi bisogna
+        // usare l identificativo giusto del database non quello in memoria qui  OPSY!
+        // Pero' va bene come test per l eccezione ✨
+
+        try {
+            List<Item> loanedItems = loanDAO.findLentOnMember(u1.getMembershipNumber());
+            loanedItems.forEach(System.out::println);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("test per cose prestate");
+        try {
+            List<Item> loanedItems = loanDAO.findLentOnMember(UUID.fromString("683151fe-c158-4361-bbfc-350ce3395c9e"));
+            loanedItems.forEach(System.out::println);
         } catch (NotFoundException e) {
             System.out.println(e.getMessage());
         }
