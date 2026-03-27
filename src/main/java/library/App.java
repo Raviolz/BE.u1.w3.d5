@@ -129,6 +129,26 @@ public class App {
             System.out.println(e.getMessage());
         }
 
+
+        // FIND BY AUTHOR ... solo books
+        try {
+            List<Book> booksByAuthorErr = bookDAO.findByAuthor("Giovanni");
+            booksByAuthorErr.forEach(book -> System.out.println(book));
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        Book b6 = new Book("191-1334719120", 1995, 100, "Sempre io per due libri stesso autore", "Io", Genre.GRAPHICNOVEL);
+//        bookDAO.save(b6);
+
+        try {
+            List<Book> booksByAuthor = bookDAO.findByAuthor("Io");
+            booksByAuthor.forEach(book -> System.out.println(book));
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+
         em.close();
         emf.close();
     }
