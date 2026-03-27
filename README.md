@@ -19,4 +19,11 @@ Concetto rinforzato mentalmente.
 
 Ogni utente puo' apparire piu volte nella tabella loans (piu prestiti) MA ogni riga di loans puo' appartente ad UN SOLO
 utente (un prestito--> un utente).
-Ogni item puo' apparire piu volte in loans (prestato piu volte) MA ogni riga e' il prestito di UN SOLO elemento. 
+Ogni item puo' apparire piu volte in loans (prestato piu volte) MA ogni riga e' il prestito di UN SOLO elemento.
+
+Rifletto ...
+
+Per item books e magazines avrei potuto usare anche una single table visto che le differenza di attributi e' poca quindi
+risulterebbero pochi null e query piu facili ma penso sia piu giusto usare una joined in quanto la traccia fa una
+distinzione tra item generale e
+sottocategorie inoltre mi risulta un sistema di archiviazione piu organizzato e pulito
